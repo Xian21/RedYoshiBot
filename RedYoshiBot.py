@@ -184,7 +184,7 @@ class ServerDatabase:
 		rows = c.execute('SELECT * FROM friend_codes WHERE userid = ?', (int(message.author.id),))
 		for row in rows:
 			# if the user already has one, this prevents adding another
-			await client.send_message(message.channel, "{}, please delete your current friend code with `@RedYoshiBot fcdelete` before adding another.".format(message.author.name))
+			await client.send_message(message.channel, "{}, please delete your current friend code with `@HyperMario fcdelete` before adding another.".format(message.author.name))
 			return
 		c.execute('INSERT INTO friend_codes VALUES (?,?,?)', (int(message.author.id), fc, notify))
 		if notify:
@@ -224,7 +224,7 @@ class ServerDatabase:
 				return
 			await client.send_message(message.channel, "{}, looks like {} has no friend code registered.".format(message.author.name, member.name))
 			return
-		await client.send_message(message.channel, "{}, you need to register your own friend code with `@RedYoshiBot fcregister` before getting others.".format(message.author.name))
+		await client.send_message(message.channel, "{}, you need to register your own friend code with `@HyperMario fcregister` before getting others.".format(message.author.name))
 
 	async def fcdelete(self, message):
 		#Delete your friend code.
@@ -393,54 +393,54 @@ async def game_coin(bot_ch, usr_ch, message):
 
 def help_array():
 	return {
-		"fcregister": ">@RedYoshiBot fcregister (friendcode) (notify)\r\nAdds your friend code to the server database. If notify is \"true\", you will be notified whenever someone queries your friend code, otherwise set it to \"false\".", 
-		"fcquery": ">@RedYoshiBot fcquery (user)\r\nGets the friend code from the specified user (you need to have your own friend code registered). If the specified user has the notify option enabled, your friend code will be sent to them as well.",
-		"fcdelete": ">@RedYoshiBot fcdelete\r\nRemoves your friend code from the server database.",
-		"ping": ">@RedYoshiBot ping\r\nPings the bot.",
-		"membercount": ">@RedYoshiBot membercount\r\nDisplays the member count of the server.",
-		"rules": ">@RedYoshiBot rules\r\nShows the server rules.",
-		"getwarn": ">@RedYoshiBot getwarn\nSends your warning amount in a DM.",
-		"getmute": ">@RedYoshiBot getmute\nSends your muted time in a DM.",
-		"fact": ">@RedYoshiBot fact (factID)\nDisplays a random fact. If factID is specified, the fact with that id will be displayed. (Use listfact to get all fact IDs.)",
-		"addfact": ">@RedYoshiBot addfact (fact)\nAdds a fact (only one per user). The format is the following: base;opt1, opt2, etc; opt1, opt2, etc; etc... any instance of {} will be replaced by a random choice. You must have the same amount of {} as ; otherwise it won't work properly.\n\nExamples:\n{} is number {}; Mario, Luigi, Yoshi; NUMBER:1:3\nI {} {} {}; hate, love; cheese, apples, USER; :wink:, :weary:\n\nNUMBER:X:Y -> Random number between X and Y\nUSER -> Random server member.",
-		"delfact": ">@RedYoshiBot delfact\nRemoves your own fact.",
-		"listfact": ">@RedYoshiBot listfact\nDisplays all facts.",
-		"communities": ">@RedYoshiBot communities\nShows the main CTGP-7 communities.",
-		"game": ">@RedYoshiBot game (gamemode) (options)\nPlays a game.",
+		"fcregister": ">@HyperMario fcregister (friendcode) (notify)\r\nAdds your friend code to the server database. If notify is \"true\", you will be notified whenever someone queries your friend code, otherwise set it to \"false\".", 
+		"fcquery": ">@HyperMario fcquery (user)\r\nGets the friend code from the specified user (you need to have your own friend code registered). If the specified user has the notify option enabled, your friend code will be sent to them as well.",
+		"fcdelete": ">@HyperMario fcdelete\r\nRemoves your friend code from the server database.",
+		"ping": ">@HyperMario ping\r\nPings the bot.",
+		"membercount": ">@HyperMario membercount\r\nDisplays the member count of the server.",
+		"rules": ">@HyperMario rules\r\nShows the server rules.",
+		"getwarn": ">@HyperMario getwarn\nSends your warning amount in a DM.",
+		"getmute": ">@HyperMario getmute\nSends your muted time in a DM.",
+		"fact": ">@HyperMario fact (factID)\nDisplays a random fact. If factID is specified, the fact with that id will be displayed. (Use listfact to get all fact IDs.)",
+		"addfact": ">@HyperMario addfact (fact)\nAdds a fact (only one per user). The format is the following: base;opt1, opt2, etc; opt1, opt2, etc; etc... any instance of {} will be replaced by a random choice. You must have the same amount of {} as ; otherwise it won't work properly.\n\nExamples:\n{} is number {}; Mario, Luigi, Yoshi; NUMBER:1:3\nI {} {} {}; hate, love; cheese, apples, USER; :wink:, :weary:\n\nNUMBER:X:Y -> Random number between X and Y\nUSER -> Random server member.",
+		"delfact": ">@HyperMario delfact\nRemoves your own fact.",
+		"listfact": ">@HyperMario listfact\nDisplays all facts.",
+		"communities": ">@HyperMario communities\nShows the main CTGP-7 communities.",
+		"game": ">@HyperMario game (gamemode) (options)\nPlays a game.",
 		"report": "!report (Explanation)\nReports a bug with the given explanation. Can only be used in #bugs_discussion.",
-		"bugcount": ">@RedYoshiBot bugcount\nShows the amount of open and closed bugs."
+		"bugcount": ">@HyperMario bugcount\nShows the amount of open and closed bugs."
 	}
 def staff_help_array():
 	return {
-		"say": ">@RedYoshiBot say (channel/user) (text)\r\nSends a message in the specified channel or a DM if it is a user.",
-		"edit": ">@RedYoshiBot edit (messageid) (text)\r\nEdits the specified message. Can only edit recent bot messages in the server.",
-		"release": ">@RedYoshiBot release (version) (tag)\r\nAnnounces the release of the specified version (data taken from github) in #announcements. If (tag) is 1, it will tag @everyone (only tag everyone for major releases)",
-		"restart": ">@RedYoshiBot restart\r\nRestarts the bot.",
-		"stop": ">@RedYoshiBot stop\r\nStops the bot, once stopped is has to be manually started again from a terminal, so no way to start it from discord.",
-		"mute": ">@RedYoshiBot mute (user) (amount)\r\nMutes an user for a certain amount. The amount can be m (minutes), h (hours), d (days) and y (years). For example: 2h, 12m, 7d, etc",
-		"unmute": ">@RedYoshiBot unmute (user)\r\nUnmutes a muted user.",
-		"warn": ">@RedYoshiBot warn (user) [Reason]\nGives a warning to an user. Reason is optional.",
-		"setwarn": ">@RedYoshiBot setwarn (user) (amount) [Reason]\nSets the warning amount of an user. Reason is optional.",
-		"getwarn": ">@RedYoshiBot getwarn\nGets all the warned users.",
-		"getmute": ">@RedYoshiBot getmute\nGets all the muted users.",
-		"delfact": ">@RedYoshiBot delfact (id)\nDeletes specified fact.",
-		"change_game": ">@RedYoshiBot change_game\nChanges the current playing game to a new random one.",
-		"closebug": ">@RedYoshiBot closebug (bugID) [Reason]\nCloses the specified bug with the specified reason.",
-		"schedule": ">@RedYoshiBot schedule (channel/user) (time_amount) (text)\nSchedules a message to be sent in/to the channel/user specified after time_amount has passed. (Works the same way as mute time amount).",
-		"cancel_schedule": ">@RedYoshiBot cancel_schedule (scheduleid)\nCancels the specified scheduled message. The schedule id can be obtained from the id of the message sent by the bot."
+		"say": ">@HyperMario say (channel/user) (text)\r\nSends a message in the specified channel or a DM if it is a user.",
+		"edit": ">@HyperMario edit (messageid) (text)\r\nEdits the specified message. Can only edit recent bot messages in the server.",
+		"release": ">@HyperMario release (version) (tag)\r\nAnnounces the release of the specified version (data taken from github) in #announcements. If (tag) is 1, it will tag @everyone (only tag everyone for major releases)",
+		"restart": ">@HyperMario restart\r\nRestarts the bot.",
+		"stop": ">@HyperMario stop\r\nStops the bot, once stopped is has to be manually started again from a terminal, so no way to start it from discord.",
+		"mute": ">@HyperMario mute (user) (amount)\r\nMutes an user for a certain amount. The amount can be m (minutes), h (hours), d (days) and y (years). For example: 2h, 12m, 7d, etc",
+		"unmute": ">@HyperMario unmute (user)\r\nUnmutes a muted user.",
+		"warn": ">@HyperMario warn (user) [Reason]\nGives a warning to an user. Reason is optional.",
+		"setwarn": ">@HyperMario setwarn (user) (amount) [Reason]\nSets the warning amount of an user. Reason is optional.",
+		"getwarn": ">@HyperMario getwarn\nGets all the warned users.",
+		"getmute": ">@HyperMario getmute\nGets all the muted users.",
+		"delfact": ">@HyperMario delfact (id)\nDeletes specified fact.",
+		"change_game": ">@HyperMario change_game\nChanges the current playing game to a new random one.",
+		"closebug": ">@HyperMario closebug (bugID) [Reason]\nCloses the specified bug with the specified reason.",
+		"schedule": ">@HyperMario schedule (channel/user) (time_amount) (text)\nSchedules a message to be sent in/to the channel/user specified after time_amount has passed. (Works the same way as mute time amount).",
+		"cancel_schedule": ">@HyperMario cancel_schedule (scheduleid)\nCancels the specified scheduled message. The schedule id can be obtained from the id of the message sent by the bot."
 	}
 def game_help_array():
 	return {
-		"guessanumber": ">@RedYoshiBot game guessanumber (easy/normal/hard) (number)\nGuess a number game.\n\neasy: Guess a number between 0 and 10 (Win: +10 yoshi cookies).\nnormal: Guess a number between 0 and 50 (Win: +50 yoshi cookies).\nhard: Guess a number between 0 and 99 (Win: +100 yoshi cookies).\nLose: -1 yoshi cookies.",
-		"rps": ">@RedYoshiBot game rps (rock/paper/scissors)\nRock-Paper-Scissors.\n\nWin: +2 yoshi cookies.\nMatch: nothing.\nLose: -1 yoshi cookies.",
-		"coin": ">@RedYoshiBot game coin (head/tails)\nFlip a coin.\n\nWin: +1 yoshi cookies.\nLose: -1 yoshi cookies.",
-		"showcookie": ">@RedYoshiBot game showcookie\nShows your amount of yoshi cookies.",
-		"top10": ">@RedYoshiBot game top10\nShows the top 10 users with the highest amount of yoshi cookies."
+		"guessanumber": ">@HyperMario game guessanumber (easy/normal/hard) (number)\nGuess a number game.\n\neasy: Guess a number between 0 and 10 (Win: +10 yoshi cookies).\nnormal: Guess a number between 0 and 50 (Win: +50 yoshi cookies).\nhard: Guess a number between 0 and 99 (Win: +100 yoshi cookies).\nLose: -1 yoshi cookies.",
+		"rps": ">@HyperMario game rps (rock/paper/scissors)\nRock-Paper-Scissors.\n\nWin: +2 yoshi cookies.\nMatch: nothing.\nLose: -1 yoshi cookies.",
+		"coin": ">@HyperMario game coin (head/tails)\nFlip a coin.\n\nWin: +1 yoshi cookies.\nLose: -1 yoshi cookies.",
+		"showcookie": ">@HyperMario game showcookie\nShows your amount of yoshi cookies.",
+		"top10": ">@HyperMario game top10\nShows the top 10 users with the highest amount of yoshi cookies."
 	}
 def staff_game_help_array():
 	return {
-		"showcookie":">@RedYoshiBot game showcookie (user)\nShows the amount of yoshi cookies of the specified user.",
-		"setcookie": ">@RedYoshiBot game setcookie (user) (amount)\nSets the amount of yoshi cookies of the specified user."
+		"showcookie":">@HyperMario game showcookie (user)\nShows the amount of yoshi cookies of the specified user.",
+		"setcookie": ">@HyperMario game setcookie (user) (amount)\nSets the amount of yoshi cookies of the specified user."
 	}
 #All the ids
 def ch_list():
@@ -458,7 +458,7 @@ def NUMBER_EMOJI():
 	return [":zero:", ":one:", ":two:", ":three:", ":four:", ":five:", ":six:", ":seven:", ":eight:", ":nine:"]
 
 def PLAYING_GAME():
-	return ["Yoshi's Story", "Yoshi's Cookie", "Yoshi's Island", "Super Smash Bros.", "Mario Party 8", "Yoshi's Woolly World", "Mario Kart 7", "CTGP-R", "Yoshi Touch & Go"]
+	return ["CTGP-Revolution", "CTGP-Universe", "CTGP-7", "Super Smash Bros. for Wii U", "Super Mario Galaxy", "Super Mario Galaxy 2", "Mario Kart 8 Deluxe", "Super Mario Universe", "Super Smash Bros. 5"]
 
 def MUTEROLE_ID():
 	return "385544890030751754"
@@ -473,7 +473,7 @@ async def send_rules(user, newusr):
 	try:
 		with open("data/rules.txt", "r") as f:
 			if (newusr):
-				await client.send_message(user, "Welcome to the CTGP-7 server! :3\nHere are the rules: ``` {} ```".format(f.read()))
+				await client.send_message(user, "Welcome to the CTGP-Revolution server! :3\nHere are the rules: ``` {} ```".format(f.read()))
 			else:
 				await client.send_message(user, "Here are the rules: ``` {} ```".format(f.read()))
 	except:
@@ -733,7 +733,7 @@ async def on_message(message):
 	try:
 		random.seed()
 		bot_mtn = message.content.split()[0]
-		if (get_from_mention(bot_mtn) == client.user) and (message.author != client.user): #@RedYoshiBot
+		if (get_from_mention(bot_mtn) == client.user) and (message.author != client.user): #@HyperMario
 			try:
 				bot_cmd = message.content.split()[1]
 				if bot_cmd == 'mute':
@@ -1143,7 +1143,7 @@ async def on_message(message):
 				elif bot_cmd == 'addfact':
 					if not is_channel(message, ch_list()["STAFF"]):
 						if(await db_mng.fact_userreg(message.author.id)):
-							await client.send_message(message.channel, "{}, you can only have one fact registered. Use `@RedYoshiBot delfact` to delete the existing one.".format(message.author.name))
+							await client.send_message(message.channel, "{}, you can only have one fact registered. Use `@HyperMario delfact` to delete the existing one.".format(message.author.name))
 							return
 					tag = message.content.split(None, 2)
 					if (len(tag) != 3):
@@ -1167,14 +1167,14 @@ async def on_message(message):
 									for index, content in game_help_array().items():
 										help_str += "`" + index + "`, "
 									help_str = help_str[:-2]
-									help_str += "\n\nUse `@RedYoshiBot help game (gamemode)` to get help of a specific command."
+									help_str += "\n\nUse `@HyperMario help game (gamemode)` to get help of a specific command."
 									await client.send_message(message.channel, help_str)
 									if is_channel(message, ch_list()["STAFF"]):
 										help_str = "\nHere is a list of all the available game staff commands:\n\n"
 										for index, content in staff_game_help_array().items():
 											help_str += "`" + index + "`, "
 										help_str = help_str[:-2]
-										help_str += "\n\nUse `@RedYoshiBot help game (gamemode)` to get help of a specific command."
+										help_str += "\n\nUse `@HyperMario help game (gamemode)` to get help of a specific command."
 										await client.send_message(message.channel, help_str)
 									return
 								else:
@@ -1185,7 +1185,7 @@ async def on_message(message):
 									if tag[3] in game_help_array():
 										await client.send_message(message.channel, "Here is the help for the specified game mode:\r\n```" + game_help_array()[tag[3]] + "```")
 									else:
-										await client.send_message(message.channel, "Unknown game mode, use `@RedYoshiBot help game` to get a list of all the available game modes.")
+										await client.send_message(message.channel, "Unknown game mode, use `@HyperMario help game` to get a list of all the available game modes.")
 									return
 							if is_channel(message, ch_list()["STAFF"]):
 								if tag[2] in staff_help_array():
@@ -1194,23 +1194,23 @@ async def on_message(message):
 							if tag[2] in help_array():
 								await client.send_message(message.channel, "Here is the help for the specified command:\r\n```" + help_array()[tag[2]] + "```")
 							else:
-								await client.send_message(message.channel, "Unknown command, use `@RedYoshiBot help` to get a list of all the available commands.")
+								await client.send_message(message.channel, "Unknown command, use `@HyperMario help` to get a list of all the available commands.")
 						else:
 							help_str = "Here is a list of all the available commands:\n\n"
 							for index, content in help_array().items():
 								help_str += "`" + index + "`, "
 							help_str = help_str[:-2]
-							help_str += "\n\nUse `@RedYoshiBot help (command)` to get help of a specific command."
+							help_str += "\n\nUse `@HyperMario help (command)` to get help of a specific command."
 							await client.send_message(message.channel, help_str)
 							if is_channel(message, ch_list()["STAFF"]):
 								help_str = "\nHere is a list of all the available staff commands:\n\n"
 								for index, content in staff_help_array().items():
 									help_str += "`" + index + "`, "
 								help_str = help_str[:-2]
-								help_str += "\n\nUse `@RedYoshiBot help (command)` to get help of a specific command."
+								help_str += "\n\nUse `@HyperMario help (command)` to get help of a specific command."
 								await client.send_message(message.channel, help_str)
 					else:
-						await client.send_message(message.channel, "`@RedYoshiBot help` can only be used in <#324672297812099093> or DM.")
+						await client.send_message(message.channel, "`@HyperMario help` can only be used in <#324672297812099093> or DM.")
 						return
 				elif bot_cmd == "game":
 					if (is_channel(message, ch_list()["BOTCHAT"]) or is_channel(message, ch_list()["STAFF"])):
@@ -1341,16 +1341,16 @@ async def on_message(message):
 									await client.send_message(message.channel, "{}, invalid user specified.".format(message.author.name))
 									return
 						else:
-							await client.send_message(message.channel, "{}, invalid game mode specified. Use `@RedYoshiBot help game` to get a list of game modes.".format(message.author.name))
+							await client.send_message(message.channel, "{}, invalid game mode specified. Use `@HyperMario help game` to get a list of game modes.".format(message.author.name))
 							return
 						return
 					else:
-						await client.send_message(message.channel, "`@RedYoshiBot game` can only be used in <#324672297812099093>.")
+						await client.send_message(message.channel, "`@HyperMario game` can only be used in <#324672297812099093>.")
 						return
 				else:
-					await client.send_message(message.channel, 'Hi {}! :3\r\nTo get the list of all the available commands use `@RedYoshiBot help`'.format(message.author.name))	
+					await client.send_message(message.channel, 'Hi {}! :3\r\nTo get the list of all the available commands use `@HyperMario help`'.format(message.author.name))	
 			except IndexError:
-				await client.send_message(message.channel, 'Hi {}! :3\r\nTo get the list of all the available commands use `@RedYoshiBot help`'.format(message.author.name))
+				await client.send_message(message.channel, 'Hi {}! :3\r\nTo get the list of all the available commands use `@HyperMario help`'.format(message.author.name))
 		elif (message.channel.is_private and not message.author == client.user):
 			staff_chan = SELF_BOT_SERVER.get_channel(ch_list()["STAFF"])
 			await client.send_message(staff_chan, "{} sent me the following in a DM:\n```{}```".format(message.author.mention, message.content))
